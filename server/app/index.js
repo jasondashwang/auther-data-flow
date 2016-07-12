@@ -1,13 +1,38 @@
-'use strict'; 
+'use strict';
 
 var app = require('express')();
 var path = require('path');
+var session = require('express-session');
+
+var idleTimeoutSeconds = 180;
+
+app.use(session({
+  resave: true,
+  secret: '@hello123',
+
+  cookie: {
+    maxAge: idleTimeoutSeconds * 1000
+  },
+
+  rolling: true
+
+}));
+
+
+app.use('/', function (req, res, next) {
+
+  console.log('session', req.session);
+  next();
+});
+
 
 app.use(require('./logging.middleware'));
 
 app.use(require('./request-state.middleware'));
 
 app.use(require('./statics.middleware'));
+
+app.use('/', require('../login/login.router'));
 
 app.use('/api', require('../api/api.router'));
 
