@@ -3,6 +3,7 @@
 var app = require('express')();
 var path = require('path');
 var session = require('express-session');
+var passport = require('passport');
 
 var idleTimeoutSeconds = 180;
 
@@ -34,6 +35,8 @@ app.use(require('./statics.middleware'));
 
 app.use('/', require('../login/login.router'));
 
+app.use('/', require('../login/oauth.router'));
+
 app.use('/api', require('../api/api.router'));
 
 var validFrontendRoutes = ['/', '/stories', '/users', '/stories/:id', '/users/:id', '/signup', '/login'];
@@ -44,6 +47,12 @@ validFrontendRoutes.forEach(function (stateRoute) {
   });
 });
 
+app.use(passport.initialize());
+
+app.use(passport.session());
+
 app.use(require('./error.middleware'));
+
+
 
 module.exports = app;

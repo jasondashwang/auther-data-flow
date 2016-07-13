@@ -23,7 +23,10 @@ var User = db.define('user', {
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
-  }
+  },
+
+  googleId: Sequelize.STRING
+
 });
 
 module.exports = User;

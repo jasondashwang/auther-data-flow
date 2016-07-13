@@ -43,7 +43,8 @@ router.get('/status', function(req, res, next) {
   } else {
     res.json({loggedIn: true});
   }
-})
+});
+
 
 
 
