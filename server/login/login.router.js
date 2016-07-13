@@ -17,7 +17,7 @@ router.post('/login', function(req, res, next){
     } else {
       req.session.isAdmin = user.isAdmin;
       req.session.userId = user.id;
-      res.sendStatus(200);
+      res.json(user);
     }
   }).catch(next);
 

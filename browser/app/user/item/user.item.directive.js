@@ -1,6 +1,6 @@
 'use strict';
 
-app.directive('userItem', function () {
+app.directive('userItem', function ($rootScope, AuthFactory) {
   return {
     restrict: 'E',
     templateUrl: '/browser/app/user/item/user.item.html',
@@ -8,7 +8,8 @@ app.directive('userItem', function () {
       user: '=model',
       glyphicon: '@',
       iconClick: '&',
-      afterRemove: '&'
+      afterRemove: '&',
+      sessionUser: '='
     },
     link: function (scope, elem, attrs) {
       if (attrs.hasOwnProperty('isForm')) scope.isForm = true;
