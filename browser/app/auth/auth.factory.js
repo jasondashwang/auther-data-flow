@@ -21,5 +21,12 @@ app.factory('AuthFactory', function($http, $q, $rootScope) {
     return $http.get('/logout');
   };
 
+  authObj.checkStatus = function(){
+    return $http.get('/status')
+    .then(function(res){
+      return res.data;
+    });
+  }
+
   return authObj;
 })

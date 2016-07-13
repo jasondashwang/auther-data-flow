@@ -29,6 +29,21 @@ router.get('/logout', function(req, res, next) {
   res.sendStatus(200);
 })
 
+router.get('/auth/me', function(req, res, next) {
+  if (!req.session.userId) {
+    res.redirect('/login');
+  } else {
+    res.redirect('/users/' + req.session.userId);
+  }
+});
+
+router.get('/status', function(req, res, next) {
+  if (!req.session.userId) {
+    res.json({loggedIn: false});
+  } else {
+    res.json({loggedIn: true});
+  }
+})
 
 
 
